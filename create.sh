@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gcloud config set project ace-demo-2
+gcloud config set project find-seller-app-dev-255510
 
 # Build common service first.
 cd common/build

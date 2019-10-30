@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-
+set echo on
 ##############################################################################
 #
 # This only needs to be run once per project.
@@ -23,13 +23,17 @@ mkdir -p ../app/secrets
 SERVICE_ACCOUNT_NAME=product-service
 SERVICE_ACCOUNT_DEST=../app/secrets/service_account.json
 
-gcloud iam service-accounts create \
-    $SERVICE_ACCOUNT_NAME \
-    --display-name $SERVICE_ACCOUNT_NAME
+#gcloud iam service-accounts create \
+#    $SERVICE_ACCOUNT_NAME \
+#    --display-name $SERVICE_ACCOUNT_NAME
 
 SA_EMAIL=$(gcloud iam service-accounts list \
     --filter="displayName:$SERVICE_ACCOUNT_NAME" \
     --format='value(email)')
+
+echo "##############################################################################"
+echo "Service account Email $SA_EMAIL"
+echo "##############################################################################"
 
 gcloud projects add-iam-policy-binding $PROJECT_NAME \
     --role roles/bigtable.user \
@@ -62,7 +66,7 @@ gcloud beta container clusters create $PRODUCT_CLUSTER_NAME \
     --project $PROJECT_NAME \
     --zone $PROJECT_ZONE \
     --no-enable-basic-auth \
-    --cluster-version "1.9.7-gke.3" \
+    --cluster-version "1.13.11-gke.9" \
     --machine-type "n1-standard-1" \
     --image-type "COS" \
     --disk-type "pd-standard" \
