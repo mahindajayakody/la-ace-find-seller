@@ -1,5 +1,5 @@
-runtime: go
-api_version: go1
+runtime: go111
+#api_version: go1
 
 handlers:
 
@@ -14,8 +14,8 @@ handlers:
   static_dir: public/assets
 
 - url: /.*
-  script: _go_app
+  script: auto
   login: required
 
 env_variables:
-  APP_TOPIC: 'fs2-items'
+  APP_TOPIC: 'fs-dev-items'

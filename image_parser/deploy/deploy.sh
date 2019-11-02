@@ -8,6 +8,7 @@ SOURCE_LOCAL_FOLDER="../app"
 
 gcloud beta functions deploy $FUNCTION_NAME \
     --entry-point=imageParser \
+    --runtime=nodejs8 \
     --source=$SOURCE_LOCAL_FOLDER \
     --stage-bucket=$PRIVATE_ASSETS \
     --trigger-resource=$PUB_SUB_TOPIC \
